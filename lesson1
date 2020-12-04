@@ -52,3 +52,15 @@ if to > 0:
 elif to < 0:
     print("Каждый сотрудник обошелся компании:")
     print(to)
+
+# Задание 6
+ro = input ("Сколько пробежал спортсмен")
+x = input ("Количество киллометров")
+ro = int(ro)
+x = int(x)
+z = 1
+while ro <= x:
+    ro = ro * 1.1
+    z = z + 1
+
+print(z)
