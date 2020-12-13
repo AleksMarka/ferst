@@ -27,14 +27,11 @@
 # }
 # print (user_info(**user))
 
-# 3 Задача - не работает. Не знаю почему, кажется все правильно.
-a = 2
-b = 3
-c = 7
+# 3 Задача
 def my_func(a, b, c):
-    z = (a, b, c)
-    y = z.remove(min(a, b, c))
-    return a + b + c - y
+    z = [a, b, c]
+    z.sort()
+    return sum(z[1:])
 a = 2
 b = 3
 c = 7
