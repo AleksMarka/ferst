@@ -1,72 +1,179 @@
-# #Задача 1
-from sys import argv
-a = argv
-b = argv
-c = argv
+# Задача 1
+from time import sleep
+class Svetofor:
+    __COLORS = {"red": 7, "yellow": 2, "green": 5}
 
-def zp(a, b, c):
-    return a * b + c
+    def __init__(self, c = "red"):
+        self.__color = c
+        print("Краснный")
 
-print(f"Ваша зарплата {zp(int(a), int(b), int(c))}")
+    def running(self):
+        if self.__color == "red":
+            self.__color = "yellow"
+            print("Желтый")
+        elif self.__color == "yellow":
+            self.__color = "green"
+            print("Зеленый")
+        else:
+            self.__color = "red"
+
+    def change_collor(self):
+        return self.__color
+
+    def interval(self, c):
+        return self.__COLORS[c]
 
 
-# #Задача 2
-# list = [300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
-# res = [el for el in list[1::] if list[(list.index(el) - 1)] < el]
-# print(res)
+s = Svetofor()
+sleep(s.interval(s.change_collor()))
+s.running()
+sleep(s.interval(s.change_collor()))
+s.running()
+sleep(s.interval(s.change_collor()))
 
-#Задача 3
-# list = [el for el in range(20, 241) if el % 20 == 0 or el % 21 == 0]
-# print(list)
+# Задача 2
+class Road:
+    __length = 0
+    __width = 0
+    __mass = 25
+    __deep = 5
+
+    def __init__(self, length, width):
+        self.__length = length
+        self.__width = width
+
+    def calc(self):
+        return f"{(self.__length * self.__width * self.__mass * self.__deep) / 1000} тонн"
+
+
+r = Road(20, 5000)
+print(r.calc())
+
+# Задача 3
+class Worker:
+    name = ""
+    surname = ""
+    position = ""
+    _income = {"wage": 0, "bonus": 0}
+
+
+class Position(Worker):
+
+    def get_full_name(self):
+        return f"{self.name} {self.surname}"
+
+    def get_total_income(self):
+        return self._income["wage"] + self._income["bonus"]
+
+    def position_worker(self):
+        return self.position
+
+
+a = Position()
+a.name = "Сергей"
+a.surname = "Иванов"
+a.position = "Электрик"
+a._income["wage"] = 25000
+a._income["bonus"] = 20000
+
+print(a.get_full_name())
+print(a.position_worker())
+print(a.get_total_income())
 
 #Задача 4
-from itertools import groupby
-# list = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
-# # res = [el for el, _ in groupby(list)] """Попробовал такой вариант, пока не понял, что он группирует соседние числа. Пусть полежит как неправильный."""
-# res = [el for el in list if list.count(el) == 1]
-# print(res)
+class Car:
+    def __init__(self, speed, color, name, is_police=True):
+        self.speed = speed
+        self.color = color
+        self.name = name
+        self.is_police = is_police
+
+    def go(self):
+        print("поехала")
+
+    def stop(self):
+        print("Машина остановилась")
+
+    def turn(self, direction):
+        print(f"Машина повернула на{direction}")
+
+    def show_speed(self):
+        return self.speed
+
+
+class WorkCar(Car):
+    def __init__(self, speed, color, name):
+        super().__init__(speed, color, name, False)
+
+
+    def show_speed(self):
+        speed = super().show_speed()
+        return speed if speed <= 40 else f"Превышение скорости: {speed}!"
+
+
+class TownCar(Car):
+    def __init__(self, speed, color, name):
+        super().__init__(speed, color, name, False)
+
+    def show_speed(self):
+        speed = super().show_speed()
+        return speed if speed <= 60 else f"Превышение скорости: {speed}!"
+
+
+class SportCar(Car):
+    def __init__(self, speed, color, name):
+        super().__init__(speed, color, name, False)
+
+class PoliceCar(Car):
+    def __init__(self, speed, color, name, is_police):
+        super().__init__(speed, color, name, True)
+
+
+tc = TownCar(0, "Зеленый", "Автобус")
+wc = WorkCar(0, "Ораньжевый", "Камаз")
+sc = SportCar(0, "Желтый", "Lamborghini")
+pc = PoliceCar(0, "Серый", "Форд", True)
+
+
+print(wc.color, wc.name)
+wc.go()
+wc.turn("право")
+wc.speed = 40
+print(wc.show_speed())
+wc.speed = 150
+print(wc.show_speed())
+wc.speed = 60
+print(wc.show_speed())
 
 #Задача 5
-# from functools import reduce
-#
-# def my_f(a, b):
-#     return a * b
-# list = [el for el in range(100, 1001) if el % 2 == 0]
-# print(reduce(my_f, list))
+class Stationery:
+    title = ""
 
-#Задача 6
-# from itertools import count
-#
-# a = 10
-# b = 15
-# def my_count(a, b):
-#     for el in count(a):
-#         if el > b:
-#             break
-#         else:
-#             print(el)
-# print(my_count(a, b))
+    def draw(self):
+        print("Запуск отрисовки")
 
-# from itertools import cycle
-# x = list(range(5))
-# for i, j in enumerate(cycle(x)):
-#     print(j, end=' ')
-#     if i > 10:
-#         print()
-#         break
-#
-# #Задача 7
-# "Вот так вроде просто"
-# # import math
-# # a = input("Введите число ")
-# # print("Факториал = ", end="")
-# # print(math.factorial(int(a)))
-#
-# "Тоже работает"
-# a = 10
-# fact = 1
-# for i in range(1, a + 1):
-#     fact = fact * i
-#
-# print("Факториал = ", end="")
-# print(fact)
+
+class Pen(Stationery):
+    def draw(self):
+        print("Запуск отрисовки ручки")
+
+
+class Pencil(Stationery):
+    def draw(self):
+        print("Запуск отрисовки карандаша")
+
+
+class Handle(Stationery):
+    def draw(self):
+        print("Запуск отрисовки маркера")
+
+
+stationery = Stationery()
+pen = Pen()
+pencil = Pencil()
+handle = Handle()
+
+stationery.draw()
+pen.draw()
+pencil.draw()
+handle.draw()
