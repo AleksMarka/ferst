@@ -1,3 +1,4 @@
+# Тест
 # Задача 1
 try:
     with open("my_file.txt", "w", encoding='UTF-8') as file:
